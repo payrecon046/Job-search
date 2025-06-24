@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerFinder | Job Search App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        .job-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-box:focus-within {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .tag {
+            transition: all 0.2s ease;
+        }
+        
+        .tag:hover {
+            background-color: #e2e8f0;
+        }
+        
+        .saved {
+            color: #f59e0b;
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-briefcase text-blue-500 text-2xl mr-2"></i>
+                    <h1 class="text-xl font-bold text-slate-800">CareerFinder</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="#" class="text-slate-600 hover:text-blue-500">Home</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-blue-500">Saved Jobs</a></li>
+                        <li><a href="#" class="text-slate-600 hover:text-blue-500">Profile</a></li>
+                    </ul>
+                </nav>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container mx-auto px-4 py-8">
+        <section class="mb-8">
+            <div class="bg-blue-600 rounded-xl p-8 text-white">
+                <h2 class="text-3xl font-bold mb-2">Find your dream job today</h2>
+                <p class="mb-6">Thousands of jobs waiting for you - search and apply in seconds</p>
+                
+                <div class="search-box bg-white rounded-lg p-2 flex items-center max-w-3xl">
+                    <div class="flex-1 flex">
+                        <div class="relative flex-1 px-4">
+                            <i class="fas fa-search absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 ml-2"></i>
+                            <input type="text" placeholder="Job title, keywords, or company" 
+                                   class="w-full py-3 pl-8 pr-4 outline-none">
+                        </div>
+                        <div class="relative w-64 border-l border-gray-200 px-4">
+                            <i class="fas fa-map-marker-alt absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 ml-2"></i>
+                            <input type="text" placeholder="Location" 
+                                   class="w-full py-3 pl-8 pr-4 outline-none">
+                        </div>
+                    </div>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md transition ml-2">
+                        Search
+                    </button>
+                </div>
+                
+                <div class="flex mt-4 space-x-2">
+                    <span class="text-sm">Popular searches:</span>
+                    <button class="tag text-xs bg-blue-500/10 hover:bg-blue-500/20 px-3 py-1 rounded-full">Developer</button>
+                    <button class="tag text-xs bg-blue-500/10 hover:bg-blue-500/20 px-3 py-1 rounded-full">Designer</button>
+                    <button class="tag text-xs bg-blue-500/10 hover:bg-blue-500/20 px-3 py-1 rounded-full">Marketing</button>
+                    <button class="tag text-xs bg-blue-500/10 hover:bg-blue-500/20 px-3 py-1 rounded-full">Remote</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="flex flex-col md:flex-row gap-6">
+            <div class="w-full md:w-64 flex-shrink-0">
+                <div class="bg-white rounded-lg shadow-sm p-4 sticky top-4">
+                    <h3 class="font-medium mb-3 text-slate-800">Filter Jobs</h3>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-slate-600 mb-2">Job Type</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">Full-time</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">Part-time</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">Contract</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">Internship</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">Remote</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-slate-600 mb-2">Experience Level</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">Entry Level</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">Mid Level</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">Senior Level</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-slate-600 mb-2">Salary Range</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="salary" class="rounded-full border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">$0 - $50k</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="salary" class="rounded-full border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">$50k - $100k</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="salary" class="rounded-full border-gray-300 text-blue-500">
+                                <span class="ml-2 text-sm">$100k+</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md transition mt-4">
+                        Apply Filters
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex-1">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-slate-800">1,245 Jobs Found</h3>
+                    <div>
+                        <span class="text-sm text-slate-600 mr-2">Sort by:</span>
+                        <select class="border border-gray-300 rounded-md px-3 py-2 text-sm">
+                            <option>Most Recent</option>
+                            <option>Highest Salary</option>
+                            <option>Most Relevant</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="space-y-4" id="job-listings">
+                    <!-- Job listings will be populated here by JavaScript -->
+                </div>
+                
+                <div class="flex justify-between items-center mt-8">
+                    <button class="pagination-btn px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Previous
+                    </button>
+                    <div class="flex space-x-2">
+                        <button class="w-10 h-10 rounded-md bg-blue-500 text-white">1</button>
+                        <button class="w-10 h-10 rounded-md border border-gray-300 hover:bg-gray-50">2</button>
+                        <button class="w-10 h-10 rounded-md border border-gray-300 hover:bg-gray-50">3</button>
+                        <span class="flex items-center px-2">...</span>
+                        <button class="w-10 h-10 rounded-md border border-gray-300 hover:bg-gray-50">10</button>
+                    </div>
+                    <button class="pagination-btn px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-medium mb-4">CareerFinder</h4>
+                    <p class="text-slate-400">Find your dream job with our powerful job search engine and career resources.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-4">For Job Seekers</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="#" class="hover:text-white">Browse Jobs</a></li>
+                        <li><a href="#" class="hover:text-white">Job Search Tips</a></li>
+                        <li><a href="#" class="hover:text-white">Resume Builder</a></li>
+                        <li><a href="#" class="hover:text-white">Career Advice</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-4">For Employers</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="#" class="hover:text-white">Post a Job</a></li>
+                        <li><a href="#" class="hover:text-white">Browse Candidates</a></li>
+                        <li><a href="#" class="hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white">Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-blue-500">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-blue-400">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-red-500">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-purple-500">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                    <p class="text-slate-400">Subscribe to our newsletter</p>
+                </div>
+            </div>
+            <div class="border-t border-slate-700 mt-8 pt-8 text-sm text-slate-400 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    © 2023 CareerFinder. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                    <a href="#" class="hover:text-white">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Sample job data
+        const jobs = [
+            {
+                id: 1,
+                title: "Senior Frontend Developer",
+                company: "TechCorp",
+                location: "San Francisco, CA",
+                salary: "$120,000 - $150,000",
+                type: "Full-time",
+                experience: "Senior",
+                isRemote: true,
+                description: "We're looking for an experienced frontend developer to join our team building cutting-edge web applications.",
+                posted: "2 days ago",
+                logo: "https://via.placeholder.com/40"
+            },
+            {
+                id: 2,
+                title: "UX/UI Designer",
+                company: "DesignHub",
+                location: "New York, NY",
+                salary: "$90,000 - $110,000",
+                type: "Full-time",
+                experience: "Mid",
+                isRemote: false,
+                description: "Join our creative team to design beautiful, user-friendly interfaces for our products.",
+                posted: "1 week ago",
+                logo: "https://via.placeholder.com/40"
+            },
+            {
+                id: 3,
+                title: "Backend Engineer",
+                company: "DataSystems",
+                location: "Remote",
+                salary: "$100,000 - $130,000",
+                type: "Contract",
+                experience: "Mid",
+                isRemote: true,
+                description: "Looking for a backend engineer to develop and maintain our server infrastructure.",
+                posted: "3 days ago",
+                logo: "https://via.placeholder.com/40"
+            },
+            {
+                id: 4,
+                title: "Product Manager",
+                company: "InnovateCo",
+                location: "Austin, TX",
+                salary: "$110,000 - $140,000",
+                type: "Full-time",
+                experience: "Senior",
+                isRemote: false,
+                description: "Lead product development from conception to launch in this exciting role.",
+                posted: "5 days ago",
+                logo: "https://via.placeholder.com/40"
+            },
+            {
+                id: 5,
+                title: "DevOps Engineer",
+                company: "CloudNet",
+                location: "Remote",
+                salary: "$115,000 - $145,000",
+                type: "Full-time",
+                experience: "Senior",
+                isRemote: true,
+                description: "Implement and maintain CI/CD pipelines and cloud infrastructure.",
+                posted: "1 day ago",
+                logo: "https://via.placeholder.com/40"
+            }
+        ];
+        
+        // Saved jobs array
+        let savedJobs = [];
+        
+        // Render job listings
+        function renderJobs(jobs) {
+            const container = document.getElementById('job-listings');
+            container.innerHTML = '';
+            
+            jobs.forEach(job => {
+                const isSaved = savedJobs.includes(job.id);
+                const saveIcon = isSaved ? 'fas' : 'far';
+                
+                const jobElement = document.createElement('div');
+                jobElement.className = 'job-card bg-white rounded-lg p-6';
+                jobElement.innerHTML = `
+                    <div class="flex justify-between">
+                        <div class="flex items-start">
+                            <img src="${job.logo}" alt="${job.company} logo" class="w-12 h-12 rounded-md mr-4">
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800">${job.title}</h3>
+                                <p class="text-slate-600">${job.company} • ${job.location}</p>
+                            </div>
+                        
