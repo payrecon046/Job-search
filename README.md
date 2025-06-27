@@ -15,4 +15,4 @@ This is a simple job search application that helps users prepare for their job s
 
 ## Getting Started
 
-1. Clone the repository:
+1. Clone the repository
